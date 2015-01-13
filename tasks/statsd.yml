@@ -3,6 +3,13 @@
 - name: Prepare Statsd directory
   file: state=directory path={{statsd_home}}
 
+- name: Is statsd already installed?
+  shell: npm -j ls "{{ stats_npm_package_name }}"
+  args:
+    chdir: "{{statsd_home}}"
+  ignore_errors: true
+  register: statsd_version
+
 - name: Install statsd with version
   npm: >
     name={{statsd_npm_package_name}}
@@ -14,7 +21,7 @@
   npm: >
     name={{statsd_npm_package_name}}
     path={{statsd_home}}
-  when: not statsd_npm_package_version
+  when: not statsd_npm_package_version and (statsd_version | failed)
 
 - name: Apply TCP repeater patch
   copy:

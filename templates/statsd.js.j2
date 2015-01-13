@@ -108,7 +108,7 @@ Optional Variables:
   port: {{statsd_port}}
 , graphitePort: {{ statsd_graphitePort }}
 , graphiteHost: {{ statsd_graphiteHost|to_nice_json }}
-, server: {{ statsd_server }}
+, server: {{ statsd_server | to_nice_json }}
 , backends: {{ statsd_backends|to_nice_json }}
 , debug: {{ statsd_debug|to_nice_json }}
 , address: {{ statsd_address|to_nice_json }}
