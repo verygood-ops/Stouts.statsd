@@ -18,7 +18,7 @@
 
 - name: Apply TCP repeater patch
   copy:
-    src: "files/{{ item }}"
+    src: "{{ item }}"
     dest: "{{ statsd_home }}/node_modules/statsd/backends/{{ item }}"
   with_items:
     - "repeater.js"
