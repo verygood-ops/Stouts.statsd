@@ -4,7 +4,7 @@
   file: state=directory path={{statsd_home}}
 
 - name: Is statsd already installed?
-  shell: npm -j ls "{{ stats_npm_package_name }}"
+  shell: npm -j ls "{{ statsd_npm_package_name }}"
   args:
     chdir: "{{statsd_home}}"
   ignore_errors: true
