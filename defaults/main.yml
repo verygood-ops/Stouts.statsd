@@ -24,3 +24,5 @@ statsd_graphite:
   legacyNamespace: false
 
 statsd_additional_options: {}       # Setup additional options
+
+statsd_support_tcp_repeater: false

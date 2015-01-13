@@ -16,6 +16,19 @@
     path={{statsd_home}}
   when: not statsd_npm_package_version
 
+- name: Apply TCP repeater patch
+  copy:
+    src: "files/{{ item }}"
+    dest: "{{ statsd_home }}/node_modules/statsd/backends/{{ item }}"
+  with_items:
+    - "repeater.js"
+    - "repeaterTcp.js"
+  when: statsd_support_tcp_repeater
+
+- name: Install TCP repeater dependencies
+  npm: name="generic-pool@2.1.1" path="{{statsd_home}}"
+  when: statsd_support_tcp_repeater
+
 - name: Configure upstart
   template: src=upstart.conf.j2 dest=/etc/init/statsd.conf
   notify:
